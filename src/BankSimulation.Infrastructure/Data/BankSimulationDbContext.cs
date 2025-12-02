@@ -1,4 +1,5 @@
 using BankSimulation.Domain.Entities.Compliance;
+using BankSimulation.Domain.Entities.Fraud;
 using BankSimulation.Domain.Entities.Audit;
 using BankSimulation.Domain.Entities.PaymentAndCards;
 using BankSimulation.Domain.Entities.TransactionManagement;
@@ -55,6 +56,10 @@ public class BankSimulationDbContext : DbContext
     public DbSet<SecurityEvent> SecurityEvents => Set<SecurityEvent>();
     public DbSet<DataAccessLog> DataAccessLogs => Set<DataAccessLog>();
     public DbSet<EncryptionKey> EncryptionKeys => Set<EncryptionKey>();
+// Fraud & Risk Tabloları
+    public DbSet<FraudRule> FraudRules => Set<FraudRule>();
+    public DbSet<FraudAlert> FraudAlerts => Set<FraudAlert>();
+    public DbSet<RiskProfile> RiskProfiles => Set<RiskProfile>();
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
