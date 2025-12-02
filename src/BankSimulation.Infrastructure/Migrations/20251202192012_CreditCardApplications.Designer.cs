@@ -4,6 +4,7 @@ using BankSimulation.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BankSimulation.Infrastructure.Migrations
 {
     [DbContext(typeof(BankSimulationDbContext))]
-    partial class BankSimulationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251202192012_CreditCardApplications")]
+    partial class CreditCardApplications
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

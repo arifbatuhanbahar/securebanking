@@ -1,3 +1,4 @@
+using BankSimulation.Domain.Entities.CreditCardApplications; // Yeni eklediğimiz using
 using BankSimulation.Domain.Entities.UserManagement;
 using BankSimulation.Domain.Enums;
 
@@ -50,4 +51,7 @@ public class CreditCard
     // Navigation Properties
     public virtual User User { get; set; } = null!;
     public virtual ICollection<CardTransaction> CardTransactions { get; set; } = new List<CardTransaction>();
+    
+    // YENİ EKLENEN SATIR: Kartın limitleri
+    public virtual ICollection<CardLimit> CardLimits { get; set; } = new List<CardLimit>();
 }

@@ -1,4 +1,6 @@
 using BankSimulation.Domain.Entities.Compliance;
+using BankSimulation.Domain.Entities.CreditCardApplications;
+using BankSimulation.Domain.Entities.System;
 using BankSimulation.Domain.Entities.Fraud;
 using BankSimulation.Domain.Entities.Audit;
 using BankSimulation.Domain.Entities.PaymentAndCards;
@@ -60,6 +62,12 @@ public class BankSimulationDbContext : DbContext
     public DbSet<FraudRule> FraudRules => Set<FraudRule>();
     public DbSet<FraudAlert> FraudAlerts => Set<FraudAlert>();
     public DbSet<RiskProfile> RiskProfiles => Set<RiskProfile>();
+// System & Configuration Tabloları
+    public DbSet<SystemSetting> SystemSettings => Set<SystemSetting>();
+    public DbSet<NotificationTemplate> NotificationTemplates => Set<NotificationTemplate>();
+// Credit Card Applications Tabloları
+    public DbSet<CardApplication> CardApplications => Set<CardApplication>();
+    public DbSet<CardLimit> CardLimits => Set<CardLimit>();
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

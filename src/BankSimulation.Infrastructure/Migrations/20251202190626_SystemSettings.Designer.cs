@@ -4,6 +4,7 @@ using BankSimulation.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BankSimulation.Infrastructure.Migrations
 {
     [DbContext(typeof(BankSimulationDbContext))]
-    partial class BankSimulationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251202190626_SystemSettings")]
+    partial class SystemSettings
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -921,121 +924,6 @@ namespace BankSimulation.Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("suspicious_activity_reports", (string)null);
-                });
-
-            modelBuilder.Entity("BankSimulation.Domain.Entities.CreditCardApplications.CardApplication", b =>
-                {
-                    b.Property<int>("ApplicationId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("application_id");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ApplicationId"));
-
-                    b.Property<DateTime>("ApplicationDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasColumnName("application_date")
-                        .HasDefaultValueSql("GETDATE()");
-
-                    b.Property<DateTime?>("ApprovedAt")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("approved_at");
-
-                    b.Property<int?>("ApprovedBy")
-                        .HasColumnType("int")
-                        .HasColumnName("approved_by");
-
-                    b.Property<string>("CardTypeRequested")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasColumnName("card_type_requested");
-
-                    b.Property<decimal?>("CreditLimitApproved")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)")
-                        .HasColumnName("credit_limit_approved");
-
-                    b.Property<string>("EmployerName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
-                        .HasColumnName("employer_name");
-
-                    b.Property<string>("EmploymentStatus")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasColumnName("employment_status");
-
-                    b.Property<decimal>("MonthlyIncome")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)")
-                        .HasColumnName("monthly_income");
-
-                    b.Property<string>("RejectionReason")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)")
-                        .HasColumnName("rejection_reason");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)")
-                        .HasColumnName("status");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int")
-                        .HasColumnName("user_id");
-
-                    b.HasKey("ApplicationId");
-
-                    b.HasIndex("ApprovedBy");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("card_applications", (string)null);
-                });
-
-            modelBuilder.Entity("BankSimulation.Domain.Entities.CreditCardApplications.CardLimit", b =>
-                {
-                    b.Property<int>("LimitId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("limit_id");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LimitId"));
-
-                    b.Property<int>("CardId")
-                        .HasColumnType("int")
-                        .HasColumnName("card_id");
-
-                    b.Property<decimal>("LimitAmount")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)")
-                        .HasColumnName("limit_amount");
-
-                    b.Property<string>("LimitType")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
-                        .HasColumnName("limit_type");
-
-                    b.Property<DateTime?>("ResetDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("reset_date");
-
-                    b.Property<decimal>("UsedAmount")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)")
-                        .HasColumnName("used_amount");
-
-                    b.HasKey("LimitId");
-
-                    b.HasIndex("CardId");
-
-                    b.ToTable("card_limits", (string)null);
                 });
 
             modelBuilder.Entity("BankSimulation.Domain.Entities.Fraud.FraudAlert", b =>
@@ -2661,35 +2549,6 @@ namespace BankSimulation.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("BankSimulation.Domain.Entities.CreditCardApplications.CardApplication", b =>
-                {
-                    b.HasOne("BankSimulation.Domain.Entities.UserManagement.User", "ApprovedByUser")
-                        .WithMany()
-                        .HasForeignKey("ApprovedBy")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("BankSimulation.Domain.Entities.UserManagement.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ApprovedByUser");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("BankSimulation.Domain.Entities.CreditCardApplications.CardLimit", b =>
-                {
-                    b.HasOne("BankSimulation.Domain.Entities.PaymentAndCards.CreditCard", "CreditCard")
-                        .WithMany("CardLimits")
-                        .HasForeignKey("CardId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CreditCard");
-                });
-
             modelBuilder.Entity("BankSimulation.Domain.Entities.Fraud.FraudAlert", b =>
                 {
                     b.HasOne("BankSimulation.Domain.Entities.UserManagement.User", "ReviewedByUser")
@@ -2962,8 +2821,6 @@ namespace BankSimulation.Infrastructure.Migrations
 
             modelBuilder.Entity("BankSimulation.Domain.Entities.PaymentAndCards.CreditCard", b =>
                 {
-                    b.Navigation("CardLimits");
-
                     b.Navigation("CardTransactions");
                 });
 
