@@ -1,4 +1,5 @@
 using BankSimulation.Domain.Entities.Compliance;
+using BankSimulation.Domain.Entities.Audit;
 using BankSimulation.Domain.Entities.PaymentAndCards;
 using BankSimulation.Domain.Entities.TransactionManagement;
 using BankSimulation.Domain.Entities.UserManagement;
@@ -17,14 +18,14 @@ public class BankSimulationDbContext : DbContext
         : base(options)
     {
     }
-    
-    // User Management Tabloları
+ // User Management Tabloları
     public DbSet<User> Users => Set<User>();
     public DbSet<UserRole> UserRoles => Set<UserRole>();
     public DbSet<UserSession> UserSessions => Set<UserSession>();
     public DbSet<LoginAttempt> LoginAttempts => Set<LoginAttempt>();
     public DbSet<PasswordHistory> PasswordHistories => Set<PasswordHistory>();
- public DbSet<Account> Accounts => Set<Account>();
+// Account Management Tabloları
+    public DbSet<Account> Accounts => Set<Account>();
     public DbSet<AccountTypeDefinition> AccountTypes => Set<AccountTypeDefinition>();
     public DbSet<AccountBeneficiary> AccountBeneficiaries => Set<AccountBeneficiary>();
     public DbSet<AccountLimit> AccountLimits => Set<AccountLimit>();
@@ -48,6 +49,12 @@ public class BankSimulationDbContext : DbContext
     public DbSet<KvkkDataRequest> KvkkDataRequests => Set<KvkkDataRequest>();
     public DbSet<MasakRecord> MasakRecords => Set<MasakRecord>();
     public DbSet<SuspiciousActivityReport> SuspiciousActivityReports => Set<SuspiciousActivityReport>();
+// Audit & Security Tabloları
+    public DbSet<AuditLog> AuditLogs => Set<AuditLog>();
+    public DbSet<PciAuditLog> PciAuditLogs => Set<PciAuditLog>();
+    public DbSet<SecurityEvent> SecurityEvents => Set<SecurityEvent>();
+    public DbSet<DataAccessLog> DataAccessLogs => Set<DataAccessLog>();
+    public DbSet<EncryptionKey> EncryptionKeys => Set<EncryptionKey>();
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
