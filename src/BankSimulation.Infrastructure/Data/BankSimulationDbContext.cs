@@ -1,3 +1,4 @@
+using BankSimulation.Domain.Entities.PaymentAndCards;
 using BankSimulation.Domain.Entities.TransactionManagement;
 using BankSimulation.Domain.Entities.UserManagement;
 using BankSimulation.Domain.Entities.AccountManagement;
@@ -33,6 +34,12 @@ public class BankSimulationDbContext : DbContext
     public DbSet<ScheduledTransaction> ScheduledTransactions => Set<ScheduledTransaction>();
     public DbSet<TransactionApproval> TransactionApprovals => Set<TransactionApproval>();
     public DbSet<GeneralLedger> GeneralLedgerEntries => Set<GeneralLedger>();
+// Payment & Cards Tabloları
+    public DbSet<CreditCard> CreditCards => Set<CreditCard>();
+    public DbSet<PaymentMethod> PaymentMethods => Set<PaymentMethod>();
+    public DbSet<CardTransaction> CardTransactions => Set<CardTransaction>();
+    public DbSet<RecurringPayment> RecurringPayments => Set<RecurringPayment>();
+    public DbSet<PaymentGateway> PaymentGateways => Set<PaymentGateway>();
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
