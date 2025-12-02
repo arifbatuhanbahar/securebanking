@@ -1,3 +1,4 @@
+using BankSimulation.Domain.Entities.Compliance;
 using BankSimulation.Domain.Entities.PaymentAndCards;
 using BankSimulation.Domain.Entities.TransactionManagement;
 using BankSimulation.Domain.Entities.UserManagement;
@@ -40,6 +41,13 @@ public class BankSimulationDbContext : DbContext
     public DbSet<CardTransaction> CardTransactions => Set<CardTransaction>();
     public DbSet<RecurringPayment> RecurringPayments => Set<RecurringPayment>();
     public DbSet<PaymentGateway> PaymentGateways => Set<PaymentGateway>();
+// Compliance & KYC Tabloları
+    public DbSet<KycDocument> KycDocuments => Set<KycDocument>();
+    public DbSet<KycVerification> KycVerifications => Set<KycVerification>();
+    public DbSet<KvkkConsent> KvkkConsents => Set<KvkkConsent>();
+    public DbSet<KvkkDataRequest> KvkkDataRequests => Set<KvkkDataRequest>();
+    public DbSet<MasakRecord> MasakRecords => Set<MasakRecord>();
+    public DbSet<SuspiciousActivityReport> SuspiciousActivityReports => Set<SuspiciousActivityReport>();
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
