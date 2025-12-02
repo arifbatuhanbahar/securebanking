@@ -1,3 +1,4 @@
+using BankSimulation.Domain.Entities.TransactionManagement;
 using BankSimulation.Domain.Entities.UserManagement;
 using BankSimulation.Domain.Entities.AccountManagement;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,13 @@ public class BankSimulationDbContext : DbContext
     public DbSet<AccountTypeDefinition> AccountTypes => Set<AccountTypeDefinition>();
     public DbSet<AccountBeneficiary> AccountBeneficiaries => Set<AccountBeneficiary>();
     public DbSet<AccountLimit> AccountLimits => Set<AccountLimit>();
+// Transaction Management Tabloları
+    public DbSet<Transaction> Transactions => Set<Transaction>();
+    public DbSet<TransactionTypeDefinition> TransactionTypes => Set<TransactionTypeDefinition>();
+    public DbSet<TransactionFee> TransactionFees => Set<TransactionFee>();
+    public DbSet<ScheduledTransaction> ScheduledTransactions => Set<ScheduledTransaction>();
+    public DbSet<TransactionApproval> TransactionApprovals => Set<TransactionApproval>();
+    public DbSet<GeneralLedger> GeneralLedgerEntries => Set<GeneralLedger>();
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
